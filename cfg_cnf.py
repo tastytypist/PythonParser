@@ -26,13 +26,19 @@ import cnf_helper
 
 left, right = 0, 1
 
-K, V, Productions = [], [], []
-variablesJar = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
-                "P", "Q", "R", "S", "T", "U", "W", "X", "Y", "Z", "A1", "B1", "C1", "D1",
-                "E1", "F1", "G1", "H1", "I1", "J1", "K1", "L1", "M1", "N1", "O1", "P1",
-                "Q1", "R1", "S1", "T1", "U1", "W1", "X1", "Y1", "Z1", "A2", "B2", "C2",
-                "D2", "E2", "F2", "G2", "H2", "I2", "J2", "K2", "L2", "M2", "N2", "O2",
-                "P2", "Q2", "R2", "S2", "T2", "U2", "W2", "X2", "Y2", "Z2"]
+terminal, variable, products = [], [], []
+variables_jar = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+                 "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+                 "A1", "B1", "C1", "D1", "E1", "F1", "G1", "H1", "I1", "J1", "K1",
+                 "L1", "M1", "N1", "O1", "P1", "Q1", "R1", "S1", "T1", "U1", "W1",
+                 "X1", "Y1", "Z1", "A2", "B2", "C2", "D2", "E2", "F2", "G2", "H2",
+                 "I2", "J2", "K2", "L2", "M2", "N2", "O2", "P2", "Q2", "R2", "S2",
+                 "T2", "U2", "V2", "W2", "X2", "Y2", "Z2", "A3", "B3", "C3", "D3",
+                 "E3", "F3", "G3", "H3", "I3", "J3", "K3", "L3", "M3", "N3", "O3",
+                 "P3", "Q3", "R3", "S3", "T3", "U3", "V3", "W3", "X3", "Y3", "Z3",
+                 "A4", "B4", "C4", "D4", "E4", "F4", "G4", "H4", "I4", "J4", "K4",
+                 "L4", "M4", "N4", "O4", "P4", "Q4", "R4", "S4", "T4", "U4", "V3",
+                 "W4", "X4", "Y4", "Z4"]
 
 
 def is_unitary(rule, variables):
@@ -42,14 +48,14 @@ def is_unitary(rule, variables):
 
 
 def is_simple(rule):
-    if rule[left] in V and rule[right][0] in K and len(rule[right]) == 1:
+    if rule[left] in variable and rule[right][0] in terminal and len(rule[right]) == 1:
         return True
     return False
 
 
-for nonTerminal in V:
-    if nonTerminal in variablesJar:
-        variablesJar.remove(nonTerminal)
+for nonTerminal in variable:
+    if nonTerminal in variables_jar:
+        variables_jar.remove(nonTerminal)
 
 
 # Add S0->S rule
@@ -62,20 +68,20 @@ def start(productions, variables):
 def delete_mixed_terms(productions, variables):
     new_productions = []
     # create a dictionary for all base production, like A->a, in the form dic['a'] = 'A'
-    dictionary = cnf_helper.setup_dict(productions, variables, terms=K)
+    dictionary = cnf_helper.setup_dict(productions, variables, terms=terminal)
     for production in productions:
         # check if the production is simple
         if is_simple(production):
             # in that case there is nothing to change
             new_productions.append(production)
         else:
-            for term in K:
+            for term in terminal:
                 for index, value in enumerate(production[right]):
                     if term == value and term not in dictionary:
                         # it's created a new production variable->term and added to it
-                        dictionary[term] = variablesJar.pop()
+                        dictionary[term] = variables_jar.pop()
                         # Variables set it's updated adding new variable
-                        V.append(dictionary[term])
+                        variable.append(dictionary[term])
                         new_productions.append((dictionary[term], [term]))
 
                         production[right][index] = dictionary[term]
@@ -96,7 +102,7 @@ def delete_unitary(productions, variables):
         if k <= 2:
             result.append(production)
         else:
-            new_var = variablesJar.pop(0)
+            new_var = variables_jar.pop(0)
             variables.append(new_var + '1')
             result.append((production[left], [production[right][0]] + [new_var + '1']))
             for i in range(1, k - 2):
@@ -163,14 +169,14 @@ if __name__ == '__main__':
     else:
         modelPath = 'cfg.txt'
 
-    K, V, Productions = cnf_helper.load_model(modelPath)
+    terminal, variable, products = cnf_helper.load_model(modelPath)
 
-    Productions = start(Productions, variables=V)
-    Productions = delete_mixed_terms(Productions, variables=V)
-    Productions = delete_unitary(Productions, variables=V)
-    Productions = delete_nonterminal(Productions)
-    Productions = create_unit(Productions, variables=V)
+    products = start(products, variables=variable)
+    products = delete_mixed_terms(products, variables=variable)
+    products = delete_unitary(products, variables=variable)
+    products = delete_nonterminal(products)
+    products = create_unit(products, variables=variable)
 
-    print(cnf_helper.pretty_form(Productions))
-    print(len(Productions))
-    open('cnf.txt', 'w').write(cnf_helper.pretty_form(Productions))
+    print(cnf_helper.pretty_form(products))
+    print(len(products))
+    open('cnf.txt', 'w').write(cnf_helper.pretty_form(products))

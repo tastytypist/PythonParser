@@ -1,16 +1,19 @@
 import re
 
 def token(file_name):
+# mendekomposisi python file menjadi token
+    # load file
     file = open(file_name, 'r')
     content = file.read()
     file.close()
 
     content = ignoreComment(content)
-    print(content, "\n")
     content = content.split(" ")
-    
+
+    # list operator    
     operator = [r'\+', '-', r'\*', '/', '//', '%', r'\*\*', '>', '=', '<', '<=', '>=', '!=', '&', r'\|', r'^', '~', '<<', '>>', r'\(', r'\)', r'\'', r'\"', ':', ',', '\n']
     
+    # tokenisasi
     for op in operator:
         tkn = []
         for c in content:
@@ -19,14 +22,12 @@ def token(file_name):
                 tkn.append(s) 
         content = [x for x in tkn if x != '']
     tkn = content
-    print(tkn)
     return tkn
 
 
 def ignoreComment(Str):
+# Meng-exclude comment dari proses parsing
     Str = re.sub('#[^\n]+\n', '', Str)                  # Single-line comment
     Str = re.sub(r'\'\'\'[^\'\'\']+\'\'\'', '', Str)    # Multiline comment
+    Str = re.sub(r'\"\"\"[^\"\"\"]+\"\"\"', '', Str)    # Multiline comment
     return Str
-
-
-token('test.py')

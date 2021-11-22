@@ -8,7 +8,7 @@ file_name = input("Python source code path: ")
 tkn = token_machine.token(file_name)
 
 # input CNF (.txt) file
-dict = cyk.cnf_to_dictionary('testcnf.txt')
+dict = cyk.cnf_to_dictionary('cnf.txt')
 
 # base of CYK parsing table
 base = cyk.cykBase(tkn, dict)
@@ -17,13 +17,14 @@ base = cyk.cykBase(tkn, dict)
 var = []
 num = []
 invalidWord = False
-for x in base:
+for i in range (len(base)):
+    x = base[i]
     if (not bool(x)):
-        if (fa.validVarName(x)):
-            var.append(x)
+        if (fa.validVarName(tkn[i])):
+            var.append(tkn[i])
         else:
-            if (fa.validNum(x)):
-                num.append(x)
+            if (fa.validNum(tkn[i])):
+                num.append(tkn[i])
             else:
                 invalidWord = True
                 break
@@ -38,8 +39,13 @@ if (not invalidWord):
         for i in range (len(tkn)):
             if (n == tkn[i]):
                 tkn[i] = 'number'
+    ''' TESTING
+    print(tkn)
+    '''
     # syntax checking (CYK)
     if(cyk.cyk(tkn, dict)):
         print("Accepted\n")
     else:
         print("Syntax Error\n")
+else:
+    print("Syntax Error\n")

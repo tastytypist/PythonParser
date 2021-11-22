@@ -1,20 +1,20 @@
 Terminals:
-+ - * / % = ! > < ( ) [ ] " ' : , # variable number string str int float false none true and as break class continue def elif else for from if import in is not or pass raise return while with exception input len open print range
++ - * / % = & ^ | ~ @ ! > < ( ) [ ] " ' : , # variable number string str int float False None True and as break class continue def elif else for from if import in is not or pass raise return while with exception input len open print range
 Variables:
 S Assignment Input Bracket Type Term Arithmetic Operand Operator String Text Boolean Relation Print If Expression Elif Else For While List Element Function Return Module From Class Comment File With
 Productions:
 S -> S S | Assignment | Print | If | For | While | List | Function | Module | Class | Comment;
-Assignment -> variable = Input | variable = File;
+Assignment -> variable = Input | variable = File | variable = Term;
 Input -> input Bracket | Type ( Input );
 Bracket -> ( ) | ( Term );
 Type -> str | int | float;
-Term -> variable | Arithmetic | String | File | Term , Term;
-Arithmetic -> Operand | Operand Operator Operand;
+Term -> variable | len Bracket | Arithmetic | String | File | Term , Term;
+Arithmetic -> Operand | Operand Operator Operand | Operator Operand;
 Operand -> number | variable | String;
-Operator -> + | - | * | / | * * | / / | %;
+Operator -> + | - | * | / | * * | / / | % | & | ^ | | | ~ | < < | > > | @ | : =;
 String -> " Text " | ' Text ' | Text;
 Text -> string | Text Text;
-Boolean -> true | false | none | Term | not Term | Term and Term | Term or Term | Term is Boolean | Term in Term | Term Relation Term;
+Boolean -> True | False | None | Term | not Term | Term and Term | Term or Term | Term is Boolean | Term in Term | Term Relation Term;
 Relation -> > | < | > = | < = | = = | ! =;
 Print -> print Bracket;
 If -> if Expression | If Elif | If Else | If raise exception | If break | If pass | If continue;
@@ -23,13 +23,13 @@ Elif -> elif Expression | Elif Elif | Elif Else;
 Else -> else : S;
 For -> for variable in variable : S | for variable in range Bracket : S;
 While -> while Expression;
-List -> [ ] | [ Element ];
+List -> [ ] | [ Element ] | List Operator List;
 Element -> Term | Element , Element;
 Function -> def variable Bracket : S | Function Return;
 Return -> return Boolean | return Term;
 Module -> From import variable | From import variable as variable;
 From -> from variable;
 Class -> class variable : S;
-Comment -> # Text;
+Comment -> # Text | " " " Text " " " | ' ' ' Text ' ' ';
 File -> open Bracket;
 With -> with File as variable : S

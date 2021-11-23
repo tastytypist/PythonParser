@@ -33,3 +33,19 @@ def ignoreComment(Str):
     Str = re.sub(r'\'\'\'[^\'\'\']+\'\'\'', '', Str)    # Multiline comment
     Str = re.sub(r'\"\"\"[^\"\"\"]+\"\"\"', '', Str)    # Multiline comment
     return Str
+
+
+def findError(file_name, error):
+# find error line (invalid variable)
+    file = open(file_name, 'r')
+    contents = file.readlines()
+    line = 0
+    for content in contents:
+        line += 1
+        i = content.find(error[0])
+        j = content.find(error[1])
+        k = content.find(error[2])
+        if (i != -1 and j != -1) or (j != -1 and k != -1):
+            break
+    content = content.replace('\n', '')
+    return line, j, content

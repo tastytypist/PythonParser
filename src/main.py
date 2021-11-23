@@ -4,6 +4,7 @@ import token_machine
 
 tkn = []
 parse_table = []
+invalid_var = False
 print('Python Parser')
 print('Type "help" for more information.')
 while (True):
@@ -37,6 +38,8 @@ while (True):
                     elif (fa.validNum(tkn[i])):
                         tkn[i] = 'number'
                     else:
+                        error = [tkn[i-1],tkn[i],tkn[i+1]]
+                        invalid_var = True
                         tkn[i] = 'exception'
             ''' TESTING
             print(tkn)
@@ -46,6 +49,10 @@ while (True):
             if (result):
                 print("Accepted")
             else:
+                if (invalid_var):
+                    line, column, content = token_machine.findError(file_name, error)
+                    print('  ' + content)
+                    print('  ' + ' '*(column) + '^ invalid variable in line ' + str(line))
                 print("Syntax Error")
         except IOError:
             print("File not accessible")

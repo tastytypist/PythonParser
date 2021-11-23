@@ -48,14 +48,14 @@ def cyk(tkn, dictionary):
                     temp = []
                 parse_table[i][j].extend(x for x in temp if x not in parse_table[i][j])
     ''' TESTING
-    '''
     print(parse_table)
     print("Base: ")
     print(parse_table[n-1])
+    '''
     if 'S' in parse_table[0][0]:
-        return True
+        return True, parse_table
     else:
-        return False
+        return False, parse_table
 
 
 def cykBase(tkn, dictionary):
@@ -70,3 +70,8 @@ def cykBase(tkn, dictionary):
     print(base)
     '''
     return base
+
+def displayParseTable(parse_table):
+# Display parse table
+    for x in parse_table:
+        print(x)

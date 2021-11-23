@@ -2,6 +2,8 @@ import fa
 import cyk
 import token_machine
 
+tkn = []
+parse_table = []
 print('Python Parser')
 print('Type "help" for more information.')
 while (True):
@@ -21,51 +23,39 @@ while (True):
             tkn = token_machine.token(file_name)
 
             # input CNF (.txt) file
-            dict = cyk.cnf_to_dictionary('cnf.txt')
+            dict = cyk.cnf_to_dictionary('../grammar/cnf.txt')
 
             # base of CYK parsing table
             base = cyk.cykBase(tkn, dict)
 
             # varible and number checking (FA)
-            var = []
-            num = []
-            invalidWord = False
             for i in range (len(base)):
                 x = base[i]
                 if (not bool(x)):
                     if (fa.validVarName(tkn[i])):
-                        var.append(tkn[i])
+                        tkn[i] = 'variable'
+                    elif (fa.validNum(tkn[i])):
+                        tkn[i] = 'number'
                     else:
-                        if (fa.validNum(tkn[i])):
-                            num.append(tkn[i])
-                        else:
-                            invalidWord = True
-                            break
-
-            if (not invalidWord):
-                # replace variables and numbers in tkn
-                for v in var:
-                    for i in range (len(tkn)):
-                        if (v == tkn[i]):
-                            tkn[i] = 'variable'
-                for n in num:
-                    for i in range (len(tkn)):
-                        if (n == tkn[i]):
-                            tkn[i] = 'number'
-                ''' TESTING
-                '''
-                print(tkn)
-                # syntax checking (CYK)
-                if(cyk.cyk(tkn, dict)):
-                    print("Accepted")
-                else:
-                    print("Syntax Error")
+                        tkn[i] = 'exception'
+            ''' TESTING
+            print(tkn)
+            '''
+            # syntax checking (CYK)
+            result, parse_table = cyk.cyk(tkn, dict)
+            if (result):
+                print("Accepted")
             else:
                 print("Syntax Error")
         except IOError:
             print("File not accessible")
     elif (command == 'quit'):
         break
+    elif (command == 'token'):
+        print('Token: ')
+        print(token_machine.token(file_name))
+        print('Parsing Table: ')
+        cyk.displayParseTable(parse_table)
     else:
         print('Invalid command, type "help" to see available commands')
     print('')

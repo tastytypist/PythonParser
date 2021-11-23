@@ -48,10 +48,10 @@ def cyk(tkn, dictionary):
                     temp = []
                 parse_table[i][j].extend(x for x in temp if x not in parse_table[i][j])
     ''' TESTING
+    '''
     print(parse_table)
     print("Base: ")
     print(parse_table[n-1])
-    '''
     if 'S' in parse_table[0][0]:
         return True
     else:

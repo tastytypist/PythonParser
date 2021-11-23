@@ -55,8 +55,7 @@ Expression -> X4 P1 | Boolean Q1
 P1 -> Boolean P2
 P2 -> W4 P3
 P3 -> T4 S | open
-Q1 -> T4 Q2
-Q2 -> S 
+Q1 -> T4 S
 D4 -> elif
 Elif -> D4 Expression | Elif Elif | Elif Else
 C4 -> else

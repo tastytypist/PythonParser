@@ -53,8 +53,8 @@ while (True):
                         if (n == tkn[i]):
                             tkn[i] = 'number'
                 ''' TESTING
-                print(tkn)
                 '''
+                print(tkn)
                 # syntax checking (CYK)
                 if(cyk.cyk(tkn, dict)):
                     print("Accepted")

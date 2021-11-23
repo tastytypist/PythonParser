@@ -18,7 +18,7 @@ Boolean -> True | False | None | Term | not Term | Term and Term | Term or Term 
 Relation -> > | < | > = | < = | = = | ! =;
 Print -> print Bracket;
 If -> if Expression | If Elif | If Else | If raise exception | If break | If pass | If continue;
-Expression -> ( Boolean ) : S | Boolean : S ;
+Expression -> ( Boolean ) : S | Boolean : S;
 Elif -> elif Expression | Elif Elif | Elif Else;
 Else -> else : S;
 For -> for variable in variable : S | for variable in range Bracket : S;

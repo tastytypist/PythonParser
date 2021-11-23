@@ -10,7 +10,10 @@ if (a > 0):
 
 for j in range (1, 10, 1):
     a = b ** j
+def do_s():
+    return 'stssdring'
 '''
-def do_s(j):
-    print ('stssdring')
-    s = b
+if (x == 0):
+    print(x)
+elif (x == 1):
+    print(b)

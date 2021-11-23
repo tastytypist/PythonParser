@@ -54,9 +54,9 @@ def is_simple(rule):
     return False
 
 
-for nonTerminal in variable:
-    if nonTerminal in variables_jar:
-        variables_jar.remove(nonTerminal)
+for non_terminal in variable:
+    if non_terminal in variables_jar:
+        variables_jar.remove(non_terminal)
 
 
 # Add S0->S rule
@@ -95,7 +95,7 @@ def delete_mixed_terms(productions, variables):
 
 
 # Eliminate non unitary rules
-def delete_unitary(productions, variables):
+def delete_nonunitary(productions, variables):
     result = []
     for production in productions:
         k = len(production[right])
@@ -139,11 +139,11 @@ def delete_nonterminal(productions):
 def unit_routine(rules, variables):
     unitaries, result = [], []
     # check if a rule is unitary
-    for aRule in rules:
-        if is_unitary(aRule, variables):
-            unitaries.append((aRule[left], aRule[right][0]))
+    for rule in rules:
+        if is_unitary(rule, variables):
+            unitaries.append((rule[left], rule[right][0]))
         else:
-            result.append(aRule)
+            result.append(rule)
     # otherwise I check if I can replace it in all the others
     for uni in unitaries:
         for rule in rules:
@@ -153,7 +153,7 @@ def unit_routine(rules, variables):
     return result
 
 
-def create_unit(productions, variables):
+def delete_unit(productions, variables):
     i = 0
     result = unit_routine(productions, variables)
     tmp = unit_routine(result, variables)
@@ -166,18 +166,18 @@ def create_unit(productions, variables):
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
-        modelPath = str(sys.argv[1])
+        model_path = str(sys.argv[1])
     else:
-        modelPath = 'cfg.txt'
+        model_path = '../grammar/cfg.txt'
 
-    terminal, variable, products = cnf_helper.load_model(modelPath)
+    terminal, variable, products = cnf_helper.load_model(model_path)
 
     products = start(products, variables=variable)
     products = delete_mixed_terms(products, variables=variable)
-    products = delete_unitary(products, variables=variable)
+    products = delete_nonunitary(products, variables=variable)
     products = delete_nonterminal(products)
-    products = create_unit(products, variables=variable)
+    products = delete_unit(products, variables=variable)
 
     print(cnf_helper.pretty_form(products))
     print(len(products))
-    open('cnf.txt', 'w').write(cnf_helper.pretty_form(products))
+    open('../grammar/cnf.txt', 'w').write(cnf_helper.pretty_form(products))

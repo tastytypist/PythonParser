@@ -1,7 +1,7 @@
 Terminals:
 + - * / % = & ^ | ~ @ ! > < ( ) [ ] { } " ' : , . # variable number string str int float False None True and as break class continue def elif else for from if import in is not or pass raise return while with input len list open print range round set tuple
 Variables:
-S Assignment Input Bracket Type Term Arithmetic Operand Operator Number String Text Boolean Relation Print If Expression Condition Body Elif Else Exception For While List Element Slice Tuple Set Function Return Module From Class Comment Open File
+S Assignment Input Bracket Type Term Arithmetic Operand Operator Number String Text Boolean Relation Print If Expression Condition Body Elif Else Exception For While List Element Slice Index Tuple Set Function Return Module From Class Comment Open File
 Productions:
 S -> S S | Assignment | Print | If | For | While | Function | Module | Class | File | Comment;
 Assignment -> variable = Input | variable = Open | variable = Boolean;
@@ -27,9 +27,10 @@ Else -> else : Body;
 Exception -> variable;
 For -> for variable in Term : Body | for variable in range Bracket : Body;
 While -> while Expression;
-List -> [ ] | [ Element ] | [ S ] | list Bracket | List Operator List;
-Element -> Term | Element , Element | Slice;
-Slice -> Term : Term | Term : Term : Term;
+List -> [ ] | [ Element ] | [ S ] | [ List ] |  list Bracket | List Operator List | Index;
+Element -> Term | Element , Element | List | Slice;
+Slice -> : | : : | Term : Term |  : Term | Term : | Term : Term : Term | : Term : Term | Term : : Term | Term : Term : | Term : : | : Term : | : : Term;
+Index -> [ Element ] | [ Element ] Index;
 Tuple -> ( ) | ( Element ) | ( S ) | tuple Bracket;
 Set -> { } | { Element } | { S } | set Bracket | Set Operator Set;
 Function -> def variable Bracket : S | def variable Bracket : Return | def variable Bracket : S Return;

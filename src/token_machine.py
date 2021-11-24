@@ -11,7 +11,7 @@ def token(file_name):
     content = re.sub(r'\"[\x00-\x7F][^\'\"]*\"', 'string', content) 
     content = content.split(" ")
     # list of operators    
-    operator = [r'\+', '-', r'\*', '/', '//', '%', r'\*\*', '>', '=', '<', '<=', '>=', '!=', '&', r'\|', r'^', '~', '<<', '>>', r'\(', r'\)', r'\'', r'\"', ':', ',', '\n']
+    operator = [r'\+', '-', r'\*', '/', '//', '%', r'\*\*', '>', '=', '<', '<=', '>=', '!=', '&', r'\|', r'^', '~', '<<', '>>', r'\(', r'\)', r'\[', r'\]', '@', r'\'', r'\"', ':', ',', '\n']
     # tokenize input for each operator
     for op in operator:
         tkn = []

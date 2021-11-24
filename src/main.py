@@ -21,6 +21,7 @@ while (True):
         print(' py <file_path>       Parsing a file')
         print(' help                 Display help menu')
         print(' quit                 Exit program')
+        print(' token                Inspect code token and parse table')
     elif (command[0:3] == 'py '):
         # input python source code
         file_name = command[3:]
@@ -45,9 +46,13 @@ while (True):
                     elif (fa.validNum(tkn[i])):
                         tkn[i] = 'number'
                     else:
-                        error = [tkn[i-1],tkn[i],tkn[i+1]]
+                        error = []
+                        for j in range(i-1,i+2):
+                            try:
+                                error.append(tkn[j])
+                            except IndexError:
+                                error.append('null')
                         invalid_var = True
-                        tkn[i] = 'exception'
             ''' TESTING
             print(tkn)
             '''
@@ -60,6 +65,7 @@ while (True):
                     line, column, content = token_machine.findError(file_name, error)
                     print('  ' + content)
                     print('  ' + ' '*(column) + '^ invalid variable in line ' + str(line))
+                    invalid_var = False
                 print("Syntax Error")
         except IOError:
             print("File not accessible")
@@ -68,7 +74,7 @@ while (True):
     elif (command == 'token'):
         print('Token: ')
         print(token_machine.token(file_name))
-        print('Parsing Table: ')
+        print('Parse Table: ')
         cyk.displayParseTable(parse_table)
     else:
         print('Invalid command, type "help" to see available commands')

@@ -1,14 +1,21 @@
 import fa
 import cyk
 import token_machine
+import sys
 
 tkn = []
 parse_table = []
 invalid_var = False
+first_iteration = True
 print('Python Parser')
 print('Type "help" for more information.')
 while (True):
-    command = input('>>> ')
+    if (len((sys.argv)) > 1) and first_iteration:
+        command = 'py ' + str(sys.argv[1])
+        print('>>> ' + command)
+        first_iteration = False
+    else:
+        command = input('>>> ')
     if (command == 'help'):
         print('Welcome to Python Parser! Here are list of available commands:')
         print(' py <file_path>       Parsing a file')

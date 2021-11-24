@@ -1,12 +1,12 @@
 Terminals:
-+ - * / % = & ^ | ~ @ ! > < ( ) [ ] " ' : , # variable number string str int float False None True and as break class continue def elif else for from if import in is not or pass raise return while with exception input len open print range
++ - * / % = & ^ | ~ @ ! > < ( ) [ ] " ' : , # variable number string str int float False None True and as break class continue def elif else for from if import in is not or pass raise return while with input len list open print range
 Variables:
-S Assignment Input Bracket Type Term Arithmetic Operand Operator String Text Boolean Relation Print If Expression Condition Body Elif Else For While List Element Function Return Module From Class Comment File With
+S Assignment Input Bracket Type Term Arithmetic Operand Operator String Text Boolean Relation Print If Expression Condition Body Elif Else Exception For While List Element Function Return Module From Class Comment File With
 Productions:
-S -> S S | Assignment | Print | If | For | While | List | Function | Module | Class | Comment;
-Assignment -> variable = Input | variable = File | variable = Term;
+S -> S S | Assignment | Print | If | For | While | Function | Module | Class | Comment;
+Assignment -> variable = Input | variable = File | variable = Boolean;
 Input -> input Bracket | Type ( Input );
-Bracket -> ( ) | ( Term );
+Bracket -> ( ) | ( Boolean ) | ( S );
 Type -> str | int | float;
 Term -> variable | len Bracket | Arithmetic | String | File | Term , Term;
 Arithmetic -> Operand | Operand Operator Operand | Operator Operand | Arithmetic Operator Operand | Bracket;
@@ -14,22 +14,23 @@ Operand -> number | variable | String;
 Operator -> + | - | * | / | * * | / / | % | & | ^ | | | ~ | < < | > > | @ | : =;
 String -> " Text " | ' Text ' | Text | String + String;
 Text -> string | Text Text;
-Boolean -> True | False | None | Term | not Term | Term and Term | Term or Term | Term is Boolean | Term in Term | Term Relation Term;
+Boolean -> True | False | None | Term | List | not Boolean | Boolean and Boolean | Boolean or Boolean | Boolean is Boolean | Boolean in Boolean | Boolean Relation Boolean;
 Relation -> > | < | > = | < = | = = | ! =;
 Print -> print Bracket;
-If -> if Expression | If Elif | If Else | If raise exception | If break | If pass | If continue;
+If -> if Expression | If Elif | If Else | If raise Exception | If break | If pass | If continue;
 Expression -> Condition : Body;
 Condition -> ( Boolean ) | Boolean;
-Body -> raise exception | break | pass | continue | Return | S | S raise exception | S break | S pass | S continue | S Return | Body Body;
+Body -> raise Exception | break | pass | continue | Return | S | S raise Exception | S break | S pass | S continue | S Return | Body Body;
 Elif -> elif Expression | Elif Elif | Elif Else;
 Else -> else : Body;
+Exception -> variable;
 For -> for variable in variable : S | for variable in range Bracket : S;
 While -> while Expression;
-List -> [ ] | [ Element ] | List Operator List;
+List -> [ ] | [ Element ] | [ S ] | list Bracket | List Operator List;
 Element -> Term | Element , Element;
 Function -> def variable Bracket : S | def variable Bracket : Return | def variable Bracket : S Return;
 Return -> return Boolean | return Term;
-Module -> From import variable | From import variable as variable;
+Module -> import variable | From import variable | From import variable as variable;
 From -> from variable;
 Class -> class variable : S;
 Comment -> # Text | " " " Text " " " | ' ' ' Text ' ' ';

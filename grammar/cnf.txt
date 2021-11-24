@@ -1,8 +1,8 @@
-S -> S S | Exception A1 | Exception B1 | Exception C1 | K4 Bracket | J4 Expression | J4 R1 | J4 S1 | J4 T1 | If U1 | If Body | If Body | If Body | F4 Z1 | F4 A11 | D4 Expression | Z3 F11 | Z3 G11 | Z3 H11 | X3 Exception | From I11 | From J11 | U3 K11 | T3 Text | S4 L11 | R4 M11
-Z4 -> = | T4 S
+S -> S S | Exception A1 | Exception B1 | Exception C1 | I4 Bracket | H4 Expression | H4 T1 | H4 U1 | H4 V1 | If W1 | If Body | If Body | If Body | D4 B11 | D4 C11 | B4 Expression | V3 O11 | V3 P11 | V3 Q11 | T3 Exception | T3 R11 | From S11 | From T11 | Q3 U11 | N3 Y11 | P3 Text | Q4 W11 | P4 X11
+Z4 -> =
 Assignment -> Exception A1 | Exception B1 | Exception C1
 A1 -> Z4 Input
-B1 -> Z4 File
+B1 -> Z4 Open
 C1 -> Z4 Boolean
 Y4 -> input
 Input -> Y4 Bracket | Type D1
@@ -14,123 +14,146 @@ Bracket -> X4 W4 | X4 E1 | X4 F1
 E1 -> Boolean W4
 F1 -> S W4
 Type -> str | int | float
-Term -> variable | V4 Bracket | Term G1 | Operand H1 | Operator Operand | Arithmetic I1 | S4 J1 | R4 K1 | String L1 | S3 Bracket | number | variable | S4 J1 | R4 K1 | String L1 | X4 W4 | X4 E1 | X4 F1 | string | Text Text | string | Text Text
-V4 -> len
-U4 -> ,
-G1 -> U4 Term
-Arithmetic -> Operand H1 | Operator Operand | Arithmetic I1 | number | variable | X4 W4 | X4 E1 | X4 F1 | S4 J1 | R4 K1 | String L1 | string | Text Text
-H1 -> Operator Operand
+Term -> variable | Exception G1 | U4 Bracket | Term H1 | S4 Bracket | Operand I1 | Operator Operand | Arithmetic J1 | Type Bracket | Q4 L1 | P4 M1 | String N1 | O3 Bracket | variable | number | Number K1 | Q4 L1 | P4 M1 | String N1 | X4 W4 | X4 E1 | X4 F1 | string | Text Text | string | Text Text
+V4 -> .
+G1 -> V4 Exception
+U4 -> len
+T4 -> ,
+H1 -> T4 Term
+S4 -> round
+Arithmetic -> S4 Bracket | Operand I1 | Operator Operand | Arithmetic J1 | Type Bracket | variable | X4 W4 | X4 E1 | X4 F1 | number | Number K1 | Q4 L1 | P4 M1 | String N1 | string | Text Text
 I1 -> Operator Operand
-Operand -> number | variable | S4 J1 | R4 K1 | String L1 | string | Text Text
-Operator -> + | - | * | / | Operator Operator | Operator Operator | % | & | ^ | | | ~ | Relation Relation | Relation Relation | @ | T4 Z4
-T4 -> :
-S4 -> "
-String -> S4 J1 | R4 K1 | String L1 | string | Text Text
-J1 -> Text S4
-R4 -> '
-K1 -> Text R4
-L1 -> Operator String
+J1 -> Operator Operand
+Operand -> variable | number | Number K1 | Q4 L1 | P4 M1 | String N1 | string | Text Text
+Operator -> + | - | * | / | Operator Operator | Operator Operator | % | & | ^ | | | ~ | Relation Relation | Relation Relation | @ | R4 Z4
+R4 -> :
+Number -> number | Number K1
+K1 -> V4 Number
+Q4 -> "
+String -> Q4 L1 | P4 M1 | String N1 | string | Text Text
+L1 -> Text Q4
+P4 -> '
+M1 -> Text P4
+N1 -> Operator String
 Text -> string | Text Text
-Boolean -> True | False | None | Q4 Boolean | Boolean M1 | Boolean N1 | Boolean O1 | Boolean P1 | Boolean Q1 | variable | V4 Bracket | Term G1 | C4 B4 | C4 B11 | C4 C11 | A4 Bracket | List D11 | Operand H1 | Operator Operand | Arithmetic I1 | number | variable | X4 W4 | X4 E1 | X4 F1 | S4 J1 | R4 K1 | String L1 | string | Text Text | S3 Bracket | S4 J1 | R4 K1 | String L1 | string | Text Text
-Q4 -> not
-P4 -> and
-M1 -> P4 Boolean
-O4 -> or
-N1 -> O4 Boolean
-N4 -> is
+Boolean -> True | False | None | Exception List | O4 Boolean | Boolean O1 | Boolean P1 | Boolean Q1 | Boolean R1 | Boolean S1 | variable | Exception G1 | U4 Bracket | Term H1 | A4 Z3 | A4 D11 | A4 E11 | Y3 Bracket | List F11 | S4 Bracket | Operand I1 | Operator Operand | Arithmetic J1 | Type Bracket | variable | X4 W4 | X4 E1 | X4 F1 | Q4 L1 | P4 M1 | String N1 | string | Text Text | O3 Bracket | number | Number K1 | Q4 L1 | P4 M1 | String N1 | string | Text Text
+O4 -> not
+N4 -> and
 O1 -> N4 Boolean
-M4 -> in
+M4 -> or
 P1 -> M4 Boolean
-Q1 -> Relation Boolean
-Relation -> > | < | Relation Z4 | Relation Z4 | Z4 Z4 | L4 Z4
-L4 -> !
-K4 -> print
-Print -> K4 Bracket
-J4 -> if
-If -> J4 Expression | J4 R1 | J4 S1 | J4 T1 | If U1 | If Body | If Body | If Body
-R1 -> Expression If
-S1 -> Expression Elif
-T1 -> Expression Else
-I4 -> raise
-U1 -> I4 Exception
-Expression -> Condition V1
-V1 -> T4 Body
-Condition -> X4 W1 | True | False | None | Q4 Boolean | Boolean M1 | Boolean N1 | Boolean O1 | Boolean P1 | Boolean Q1 | variable | V4 Bracket | Term G1 | Operand H1 | Operator Operand | Arithmetic I1 | S4 J1 | R4 K1 | String L1 | S3 Bracket | C4 B4 | C4 B11 | C4 C11 | A4 Bracket | List D11 | number | variable | S4 J1 | R4 K1 | String L1 | string | Text Text | X4 W4 | X4 E1 | X4 F1 | string | Text Text
-W1 -> Boolean W4
-Body -> I4 Exception | break | pass | continue | S X1 | S Body | S Body | S Body | S Return | Body Body | Y3 Boolean | Y3 Term | S S | Exception A1 | Exception B1 | Exception C1 | K4 Bracket | J4 Expression | J4 R1 | J4 S1 | J4 T1 | If U1 | If Body | If Body | If Body | F4 Z1 | F4 A11 | D4 Expression | Z3 F11 | Z3 G11 | Z3 H11 | X3 Exception | From I11 | From J11 | U3 K11 | T3 Text | S4 L11 | R4 M11
-X1 -> I4 Exception
-H4 -> elif
-Elif -> H4 Expression | Elif Elif | Elif Else
-G4 -> else
-Else -> G4 Y1
-Y1 -> T4 Body
+L4 -> is
+Q1 -> L4 Boolean
+K4 -> in
+R1 -> K4 Boolean
+S1 -> Relation Boolean
+Relation -> > | < | Relation Z4 | Relation Z4 | Z4 Z4 | J4 Z4
+J4 -> !
+I4 -> print
+Print -> I4 Bracket
+H4 -> if
+If -> H4 Expression | H4 T1 | H4 U1 | H4 V1 | If W1 | If Body | If Body | If Body
+T1 -> Expression If
+U1 -> Expression Elif
+V1 -> Expression Else
+G4 -> raise
+W1 -> G4 Exception
+Expression -> Condition X1
+X1 -> R4 Body
+Condition -> X4 Y1 | True | False | None | Exception List | O4 Boolean | Boolean O1 | Boolean P1 | Boolean Q1 | Boolean R1 | Boolean S1 | variable | Exception G1 | U4 Bracket | Term H1 | S4 Bracket | Operand I1 | Operator Operand | Arithmetic J1 | Type Bracket | Q4 L1 | P4 M1 | String N1 | O3 Bracket | A4 Z3 | A4 D11 | A4 E11 | Y3 Bracket | List F11 | variable | number | Number K1 | Q4 L1 | P4 M1 | String N1 | string | Text Text | X4 W4 | X4 E1 | X4 F1 | string | Text Text
+Y1 -> Boolean W4
+Body -> G4 Exception | break | pass | continue | S Z1 | S Body | S Body | S Body | S Return | Body Body | U3 Boolean | U3 Term | S S | Exception A1 | Exception B1 | Exception C1 | I4 Bracket | H4 Expression | H4 T1 | H4 U1 | H4 V1 | If W1 | If Body | If Body | If Body | D4 B11 | D4 C11 | B4 Expression | V3 O11 | V3 P11 | V3 Q11 | T3 Exception | T3 R11 | From S11 | From T11 | Q3 U11 | N3 Y11 | P3 Text | Q4 W11 | P4 X11
+Z1 -> G4 Exception
+F4 -> elif
+Elif -> F4 Expression | Elif Elif | Elif Else
+E4 -> else
+Else -> E4 A11
+A11 -> R4 Body
 Exception -> variable
-F4 -> for
-For -> F4 Z1 | F4 A11
-Z1 -> Exception Z2
-Z2 -> M4 Z3
-Z3 -> Term Z4 | def
-E4 -> range
-A11 -> Exception A12
-A12 -> M4 A13
-A13 -> E4 A14
-A14 -> Bracket A15
-A15 -> T4 S
-D4 -> while
-While -> D4 Expression
-C4 -> [
-B4 -> ]
-List -> C4 B4 | C4 B11 | C4 C11 | A4 Bracket | List D11
-B11 -> Element B4
-C11 -> S B4
-A4 -> list
-D11 -> Operator List
-Element -> Element E11 | variable | V4 Bracket | Term G1 | Operand H1 | Operator Operand | Arithmetic I1 | number | variable | X4 W4 | X4 E1 | X4 F1 | S4 J1 | R4 K1 | String L1 | string | Text Text | S3 Bracket | S4 J1 | R4 K1 | String L1 | string | Text Text
-E11 -> U4 Element
-Function -> Z3 F11 | Z3 G11 | Z3 H11
-F11 -> Exception F12
-F12 -> Bracket F13
-F13 -> T4 S
-G11 -> Exception G12
-G12 -> Bracket G13
-G13 -> T4 Return
-H11 -> Exception H12
-H12 -> Bracket H13
-H13 -> T4 H14
-H14 -> S Return
-Y3 -> return
-Return -> Y3 Boolean | Y3 Term
-X3 -> import
-Module -> X3 Exception | From I11 | From J11
-I11 -> X3 Exception
-W3 -> as
-J11 -> X3 J12
-J12 -> Exception J13
-J13 -> W3 Exception
-V3 -> from
-From -> V3 Exception
-U3 -> class
-Class -> U3 K11
-K11 -> Exception K12
-K12 -> T4 S
-T3 -> #
-Comment -> T3 Text | S4 L11 | R4 M11
-L11 -> S4 L12
-L12 -> S4 L13
-L13 -> Text L14
-L14 -> S4 L15
-L15 -> S4 S4
-M11 -> R4 M12
-M12 -> R4 M13
-M13 -> Text M14
-M14 -> R4 M15
-M15 -> R4 R4
-S3 -> open
-File -> S3 Bracket
-R3 -> with
-With -> R3 N11
-N11 -> File N12
-N12 -> W3 N13
-N13 -> Exception N14
-N14 -> T4 S
-S0 -> S S | Exception A1 | Exception B1 | Exception C1 | K4 Bracket | J4 Expression | J4 R1 | J4 S1 | J4 T1 | If U1 | If Body | If Body | If Body | F4 Z1 | F4 A11 | D4 Expression | Z3 F11 | Z3 G11 | Z3 H11 | X3 Exception | From I11 | From J11 | U3 K11 | T3 Text | S4 L11 | R4 M11
+D4 -> for
+For -> D4 B11 | D4 C11
+B11 -> Exception B12
+B12 -> K4 B13
+B13 -> Term B14
+B14 -> R4 Body
+C4 -> range
+C11 -> Exception C12
+C12 -> K4 C13
+C13 -> C4 C14
+C14 -> Bracket C15
+C15 -> R4 Body
+B4 -> while
+While -> B4 Expression
+A4 -> [
+Z3 -> ]
+List -> A4 Z3 | A4 D11 | A4 E11 | Y3 Bracket | List F11
+D11 -> Element Z3
+E11 -> S Z3
+Y3 -> list
+F11 -> Operator List
+Element -> Element G11 | variable | Exception G1 | U4 Bracket | Term H1 | Term H11 | Term I11 | S4 Bracket | Operand I1 | Operator Operand | Arithmetic J1 | Type Bracket | variable | X4 W4 | X4 E1 | X4 F1 | Q4 L1 | P4 M1 | String N1 | string | Text Text | O3 Bracket | number | Number K1 | Q4 L1 | P4 M1 | String N1 | string | Text Text
+G11 -> T4 Element
+Slice -> Term H11 | Term I11
+H11 -> R4 Term
+I11 -> R4 I12
+I12 -> Term I13
+I13 -> R4 Term
+Tuple -> X4 W4 | X4 J11 | X4 K11 | X3 Bracket
+J11 -> Element W4
+K11 -> S W4
+X3 -> tuple
+Set -> { } | { L11 | { M11 | W3 Bracket | Set N11
+L11 -> Element }
+M11 -> S }
+W3 -> set
+N11 -> Operator Set
+V3 -> def
+Function -> V3 O11 | V3 P11 | V3 Q11
+O11 -> Exception O12
+O12 -> Bracket O13
+O13 -> R4 S
+P11 -> Exception P12
+P12 -> Bracket P13
+P13 -> R4 Return
+Q11 -> Exception Q12
+Q12 -> Bracket Q13
+Q13 -> R4 Q14
+Q14 -> S Return
+U3 -> return
+Return -> U3 Boolean | U3 Term
+T3 -> import
+Module -> T3 Exception | T3 R11 | From S11 | From T11
+S3 -> as
+R11 -> Exception R12
+R12 -> S3 Exception
+S11 -> T3 Exception
+T11 -> T3 T12
+T12 -> Exception T13
+T13 -> S3 Exception
+R3 -> from
+From -> R3 Exception
+Q3 -> class
+Class -> Q3 U11
+U11 -> Exception U12
+U12 -> R4 Body
+P3 -> #
+Comment -> P3 Text | Q4 W11 | P4 X11
+W11 -> Q4 W12
+W12 -> Q4 W13
+W13 -> Text W14
+W14 -> Q4 W15
+W15 -> Q4 Q4
+X11 -> P4 X12
+X12 -> P4 X13
+X13 -> Text X14
+X14 -> P4 X15
+X15 -> P4 P4
+O3 -> open
+Open -> O3 Bracket
+N3 -> with
+File -> N3 Y11
+Y11 -> Open Y12
+Y12 -> S3 Y13
+Y13 -> Exception Y14
+Y14 -> R4 Body
+S0 -> S S | Exception A1 | Exception B1 | Exception C1 | I4 Bracket | H4 Expression | H4 T1 | H4 U1 | H4 V1 | If W1 | If Body | If Body | If Body | D4 B11 | D4 C11 | B4 Expression | V3 O11 | V3 P11 | V3 Q11 | T3 Exception | T3 R11 | From S11 | From T11 | Q3 U11 | N3 Y11 | P3 Text | Q4 W11 | P4 X11

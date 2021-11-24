@@ -7,8 +7,8 @@ def token(file_name):
     content = file.read()
     file.close()
     content = ignoreComment(content)
-    content = re.sub(r'\'[A-z0-9]*\'', 'string', content) 
-    content = re.sub(r'\"[A-z0-9]*\"', 'string', content) 
+    content = re.sub(r'\'[\x00-\x7F][^\'\"]*\'', 'string', content) 
+    content = re.sub(r'\"[\x00-\x7F][^\'\"]*\"', 'string', content) 
     content = content.split(" ")
     # list of operators    
     operator = [r'\+', '-', r'\*', '/', '//', '%', r'\*\*', '>', '=', '<', '<=', '>=', '!=', '&', r'\|', r'^', '~', '<<', '>>', r'\(', r'\)', r'\'', r'\"', ':', ',', '\n']

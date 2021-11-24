@@ -11,12 +11,12 @@ def cnf_to_dictionary(cnf_file):
     for line in content:
         # delete empty line ('') and newline ('\n')
         line = line.replace('\n', '')
-        line = line.replace(' ', '')
         if (line != ''):
-            LHS = line.split('->')[0]               # left hand side of production rule
-            RHS = line.split('->')[1].split('|')    # right hand side of production rule
+            LHS = line.split(' -> ')[0]               # left hand side of production rule
+            RHS = line.split(' -> ')[1].split(' | ')    # right hand side of production rule
             # fill dictionary: RHS as dictionary key and LHS as value 
             for x in RHS:
+                x = x.replace(' ','')
                 if (dictionary.get(x) == None):
                     dictionary.update({x:[LHS]})
                 else:

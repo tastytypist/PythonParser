@@ -72,10 +72,14 @@ while (True):
     elif (command == 'quit'):
         break
     elif (command == 'token'):
-        print('Token: ')
-        print(token_machine.token(file_name))
-        print('Parse Table: ')
-        cyk.displayParseTable(parse_table)
+        try:
+            x = file_name   # check if variable file_name is defined
+            print('Token: ')
+            print(token_machine.token(file_name))
+            print('Parse Table: ')
+            cyk.displayParseTable(parse_table)
+        except NameError:
+            print("Use the parser before using the token command")
     else:
         print('Invalid command, type "help" to see available commands')
     print('')

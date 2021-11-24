@@ -16,7 +16,8 @@ F1 -> S W4
 Type -> str | int | float
 Term -> variable | Exception G1 | U4 Bracket | Term H1 | S4 Bracket | Operand I1 | Operator Operand | Arithmetic J1 | Type Bracket | Q4 L1 | P4 M1 | String N1 | M3 Bracket | variable | number | Number K1 | Q4 L1 | P4 M1 | String N1 | X4 W4 | X4 E1 | X4 F1 | string | Text Text | string | Text Text
 V4 -> .
-G1 -> V4 Exception
+G1 -> V4 G2
+G2 -> Exception Bracket
 U4 -> len
 T4 -> ,
 H1 -> T4 Term

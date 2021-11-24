@@ -8,7 +8,7 @@ Assignment -> variable = Input | variable = Open | variable = Boolean;
 Input -> input Bracket | Type ( Input );
 Bracket -> ( ) | ( Boolean ) | ( S );
 Type -> str | int | float;
-Term -> variable | variable . variable | len Bracket | Arithmetic | String | Open | Term , Term;
+Term -> variable | variable . variable Bracket | len Bracket | Arithmetic | String | Open | Term , Term;
 Arithmetic -> round Bracket | Operand | Operand Operator Operand | Operator Operand | Arithmetic Operator Operand | Bracket | Type Bracket;
 Operand -> variable | Number | String;
 Operator -> + | - | * | / | * * | / / | % | & | ^ | | | ~ | < < | > > | @ | : =;

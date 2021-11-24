@@ -1,5 +1,5 @@
 Terminals:
-+ - * / % = & ^ | ~ @ ! > < ( ) [ ] " ' : , . # variable number string str int float False None True and as break class continue def elif else for from if import in is not or pass raise return while with input len list open print range round set tuple
++ - * / % = & ^ | ~ @ ! > < ( ) [ ] { } " ' : , . # variable number string str int float False None True and as break class continue def elif else for from if import in is not or pass raise return while with input len list open print range round set tuple
 Variables:
 S Assignment Input Bracket Type Term Arithmetic Operand Operator Number String Text Boolean Relation Print If Expression Condition Body Elif Else Exception For While List Element Slice Tuple Set Function Return Module From Class Comment Open File
 Productions:
